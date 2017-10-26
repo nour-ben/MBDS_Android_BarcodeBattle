@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="100dp">
+
+            <TextView
+                android:id="@+id/attack_enemy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/attack" />
+
+            <TextView
+                android:id="@+id/defense_enemy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/defense"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/creature_enemy"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_gravity="right"
+            android:src="@drawable/unknown_body"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/creature_myself"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_gravity="left"
+            android:src="@drawable/unknown_body"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="100dp" >
+
+            <TextView
+                android:id="@+id/attack_myself"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/attack"/>
+
+            <TextView
+                android:id="@+id/defense_myself"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/defense"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
