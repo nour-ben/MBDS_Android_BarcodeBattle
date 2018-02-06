@@ -11,20 +11,38 @@ import java.io.Serializable;
 
 public class Equipment implements Parcelable{
     String name;
-    String effect;
+    String type;
+    int value;
     String photo;
 
     public Equipment() {}
 
-    public Equipment(String name, String effect) {
+    public Equipment(String name, String effect, int value, String photo) {
         this.name = name;
-        this.effect = effect;
+        this.type = effect;
+        this.value = value;
+        this.photo = photo;
     }
 
-    public Equipment(Parcel in) {
+
+    protected Equipment(Parcel in) {
         name = in.readString();
-        effect = in.readString();
+        type = in.readString();
+        value = in.readInt();
         photo = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(type);
+        dest.writeInt(value);
+        dest.writeString(photo);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Equipment> CREATOR = new Creator<Equipment>() {
@@ -39,18 +57,6 @@ public class Equipment implements Parcelable{
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(effect);
-        dest.writeString(photo);
-    }
-
     public String getName() {
         return name;
     }
@@ -59,19 +65,27 @@ public class Equipment implements Parcelable{
         this.name = name;
     }
 
-    public String getEffect() {
-        return effect;
-    }
-
-    public void setEffect(String effect) {
-        this.effect = effect;
-    }
-
     public String getPhoto() {
         return photo;
     }
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

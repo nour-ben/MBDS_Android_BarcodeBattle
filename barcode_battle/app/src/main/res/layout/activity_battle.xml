@@ -1,81 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:gravity="center|left">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginRight="100dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/attack_enemy"
+            <ImageView
+                android:id="@+id/creature_myself"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/attack" />
+                android:layout_height="100dp"
+                android:layout_gravity="left"
+                android:src="@drawable/unknown_body" />
 
-            <TextView
-                android:id="@+id/defense_enemy"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/defense"/>
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/attack" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/defense" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/attack_myself"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/attack" />
+
+                    <TextView
+                        android:id="@+id/defense_myself"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/defense" />
+
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/creature_enemy"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_gravity="right"
-            android:src="@drawable/unknown_body"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/creature_myself"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_gravity="left"
-            android:src="@drawable/unknown_body"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginRight="100dp" >
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/attack_myself"
-                android:layout_width="wrap_content"
+                android:id="@+id/tour"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/attack"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Bienvenue !" />
 
             <TextView
-                android:id="@+id/defense_myself"
-                android:layout_width="wrap_content"
+                android:id="@+id/player"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/defense"/>
+                android:layout_weight="1"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:layout_weight="1"
+                android:text="" />
 
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:gravity="center|right">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/creature_enemy"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_gravity="left"
+                android:src="@drawable/unknown_body" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/attack" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/defense" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/attack_enemy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/attack" />
+
+                    <TextView
+                        android:id="@+id/defense_enemy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/defense" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/attack"
+            android:layout_width="248dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="JOUER" />
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -11,15 +11,20 @@
     <string name="ssmenu_scan">Scan</string>
     <string name="ssmenu_sms">Envoyer</string>
 
-
-    <!-- Combat .MainActivity -->
+    <!-- Combat .BattleActivity -->
     <string name="attack">ATTAQUE</string>
     <string name="defense">DEFENSE</string>
+
+    <!-- Combat .List -->
+    <string name="equipement">EQUIPEMENTS</string>
+    <string name="potion">POTIONS</string>
+    <string name="creature">CREATURES</string>
 
     <!-- LOGIN .MainActivity -->
     <string name="login">AUTHENTIFICATION</string>
     <string name="connection">CONNEXION</string>
     <string name="create_account">S\'inscrire</string>
+
 
     <!-- REGISTER .RegisterActivity -->
     <string name="title_register">INSCRIPTION</string>

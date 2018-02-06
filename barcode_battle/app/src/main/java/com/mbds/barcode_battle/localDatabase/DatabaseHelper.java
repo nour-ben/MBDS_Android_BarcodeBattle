@@ -13,25 +13,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_EQUIPMENT = "table_EQUIPMENT";
     public static final String COL_ID_EQUIPMENT ="EQUIPMENT_id";
     public static final String COL_NAME_EQUIPMENT ="EQUIPMENT_name";
-    public static final String COL_EFFECT_EQUIPMENT ="EQUIPMENT_effect";
+    public static final String COL_TYPE_EQUIPMENT ="EQUIPMENT_type";
+    public static final String COL_VALUE_EQUIPMENT = "EQUIPMENT_value";
     public static final String COL_PHOTO_EQUIPMENT = "EQUIPMENT_photo";
 
     private final String CREATE_TABLE_EQUIPMENT = "CREATE TABLE " + TABLE_EQUIPMENT + "("
             + COL_ID_EQUIPMENT + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_NAME_EQUIPMENT + " TEXT UNIQUE, "
-            + COL_EFFECT_EQUIPMENT + " TEXT, "
+            + COL_TYPE_EQUIPMENT + " TEXT, "
+            + COL_VALUE_EQUIPMENT + " INTEGER, "
             + COL_PHOTO_EQUIPMENT + "  TEXT)";
 
     public static final String TABLE_POTION = "table_POTION";
     public static final String COL_ID_POTION ="POTION_id";
-    public static final String COL_NAME_POTION ="POTION_name";
-    public static final String COL_EFFECT_POTION ="POTION_effect";
+    public static final String COL_VALUE_POTION ="POTION_value";
     public static final String COL_PHOTO_POTION = "POTION_photo";
 
     private final String CREATE_TABLE_POTION = "CREATE TABLE " + TABLE_POTION + "("
             + COL_ID_POTION  + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COL_NAME_POTION + " TEXT UNIQUE, "
-            + COL_EFFECT_POTION + " TEXT, "
+            + COL_VALUE_POTION + " INTEGER, "
             + COL_PHOTO_POTION + "  TEXT)";
 
     public static final String TABLE_CREATURE = "table_CREATURE";
@@ -48,22 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COL_LIFE_CREATURE + " INTEGER, "
             + COL_PTATTACK_CREATURE + " INTEGER NOT NULL, "
             + COL_PTDEFENSE_CREATURE + " INTEGER NOT NULL,"
-            + COL_PHOTO_CREATURE + "  TEXT,"
-            + "FOREIGNKEY("+ COL_NAME_EQUIPMENT +")" + " REFERENCES " + TABLE_EQUIPMENT + "(" + COL_NAME_EQUIPMENT + "))";
-
-    public static final String TABLE_USER ="table_USER";
-    public static final String COL_ID_USER ="USER_id";
-    public static final String COL_MAIL_USER ="USER_mail";
-    public static final String COL_PASSWORD_USER ="USER_password";
-    public static final String COL_PHOTO_USER = "USER_photo";
-
-
-
-    private final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER + "("
-            + COL_ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COL_MAIL_USER + " TEXT UNIQUE, "
-            + COL_PASSWORD_USER + " TEXT, "
-            + COL_PHOTO_USER + "  TEXT)";
+            + COL_PHOTO_CREATURE + "  TEXT)";
 
     /**
      * Create a helper object to create, open, and/or manage a database.
@@ -94,7 +79,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_EQUIPMENT);
         db.execSQL(CREATE_TABLE_POTION);
         db.execSQL(CREATE_TABLE_CREATURE);
-        db.execSQL(CREATE_TABLE_USER);
     }
 
     /**
@@ -119,10 +103,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_CREATURE+ ";");
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_POTION + ";");
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_EQUIPMENT + ";");
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_USER + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CREATURE+ ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_POTION + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EQUIPMENT + ";");
         onCreate(db);
     }
 

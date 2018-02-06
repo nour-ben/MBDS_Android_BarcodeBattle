@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class User implements Parcelable {
     private String name;
     private String password;
-    private ArrayList<Creature> team;
 
 
     public User(String name, String password) {
@@ -23,14 +22,12 @@ public class User implements Parcelable {
     protected User(Parcel in) {
         name = in.readString();
         password = in.readString();
-        team = in.createTypedArrayList(Creature.CREATOR);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(password);
-        dest.writeTypedList(team);
     }
 
     @Override
@@ -66,15 +63,4 @@ public class User implements Parcelable {
         this.password = password;
     }
 
-    public ArrayList<Creature> getTeam() {
-        return team;
-    }
-
-    public void setTeam(ArrayList<Creature> team) {
-        this.team = team;
-    }
-
-    public void addToTeam(Creature creature) {
-        this.team.add(creature);
-    }
 }

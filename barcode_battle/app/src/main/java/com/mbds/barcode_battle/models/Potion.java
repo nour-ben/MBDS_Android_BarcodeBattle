@@ -8,28 +8,20 @@ import android.os.Parcelable;
  */
 
 public class Potion implements Parcelable {
-    String name;
-    String effect;
-    String photo;
+    int value;
 
-    public Potion() {}
-
-    public Potion(String name, String effect) {
-        this.name = name;
-        this.effect = effect;
+    public Potion(int value) {
+        this.value = value;
     }
 
-    public Potion(Parcel in) {
-        name = in.readString();
-        effect = in.readString();
-        photo = in.readString();
+
+    protected Potion(Parcel in) {
+        value = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(effect);
-        dest.writeString(photo);
+        dest.writeInt(value);
     }
 
     @Override
@@ -49,27 +41,11 @@ public class Potion implements Parcelable {
         }
     };
 
-    public String getName() {
-        return name;
+    public int getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEffect() {
-        return effect;
-    }
-
-    public void setEffect(String effect) {
-        this.effect = effect;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setValue(int value) {
+        this.value = value;
     }
 }

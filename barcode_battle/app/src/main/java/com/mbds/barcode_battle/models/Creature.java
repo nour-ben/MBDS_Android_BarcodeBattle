@@ -19,11 +19,12 @@ public class Creature implements Parcelable {
 
     public Creature() {}
 
-    public Creature(String name, int ptAttack, int ptDefense) {
+    public Creature(String name, int ptAttack, int ptDefense, String photo) {
         this.name = name;
         this.ptAttack = ptAttack;
         this.ptDefense = ptDefense;
         this.life = 100;
+        this.photo = photo;
       //  this.equipment = new Equipment();
     }
 
