@@ -98,19 +98,6 @@ public class DBHandler {
         return null;
     }
 
-    public void updateEquipment (Equipment equipment) {
-        open();
-        ContentValues updated = new ContentValues();
-        updated.put(DatabaseHelper.COL_NAME_EQUIPMENT, equipment.getName());
-        updated.put(DatabaseHelper.COL_TYPE_EQUIPMENT, equipment.getType());
-        updated.put(DatabaseHelper.COL_VALUE_EQUIPMENT, equipment.getValue());
-        if (equipment.getPhoto() != null) {
-            updated.put(DatabaseHelper.COL_PHOTO_CREATURE, equipment.getPhoto());
-        }
-        db.update(DatabaseHelper.TABLE_EQUIPMENT, updated, DatabaseHelper.COL_NAME_EQUIPMENT + " = '" + equipment.getName() + "'", null);
-        close();
-    }
-
     public void deleteEquipment (String name) {
         open();
         db.delete(DatabaseHelper.TABLE_EQUIPMENT, DatabaseHelper.COL_NAME_EQUIPMENT + "= ?", new String[]{ name });
@@ -192,7 +179,6 @@ public class DBHandler {
         if (c != null  ) {
             ContentValues store = new ContentValues();
             store.put(DatabaseHelper.COL_NAME_CREATURE, c.getName());
-            store.put(DatabaseHelper.COL_LIFE_CREATURE, c.getLife());
             store.put(DatabaseHelper.COL_PTATTACK_CREATURE, c.getPtAttack());
             store.put(DatabaseHelper.COL_PTDEFENSE_CREATURE, c.getPtDefense());
             store.put(DatabaseHelper.COL_PHOTO_CREATURE, c.getPhoto());
@@ -245,18 +231,6 @@ public class DBHandler {
         return null;
     }
 
-    public void updateCreature (Creature creature) {
-        open();
-        ContentValues updated = new ContentValues();
-        updated.put(DatabaseHelper.COL_NAME_CREATURE, creature.getName());
-        updated.put(DatabaseHelper.COL_PTATTACK_CREATURE, creature.getPtAttack());
-        updated.put(DatabaseHelper.COL_PTDEFENSE_CREATURE, creature.getPtDefense());
-        if (creature.getPhoto() != null) {
-            updated.put(DatabaseHelper.COL_PHOTO_CREATURE, creature.getPhoto());
-        }
-        db.update(DatabaseHelper.TABLE_CREATURE, updated, DatabaseHelper.COL_NAME_CREATURE + " = '" + creature.getName() + "'", null);
-        close();
-    }
 
     public void deleteCreature (String name) {
         open();

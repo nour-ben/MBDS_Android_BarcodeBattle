@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final String CREATE_TABLE_EQUIPMENT = "CREATE TABLE " + TABLE_EQUIPMENT + "("
             + COL_ID_EQUIPMENT + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COL_NAME_EQUIPMENT + " TEXT UNIQUE, "
+            + COL_NAME_EQUIPMENT + " TEXT, "
             + COL_TYPE_EQUIPMENT + " TEXT, "
             + COL_VALUE_EQUIPMENT + " INTEGER, "
             + COL_PHOTO_EQUIPMENT + "  TEXT)";
@@ -31,13 +31,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final String CREATE_TABLE_POTION = "CREATE TABLE " + TABLE_POTION + "("
             + COL_ID_POTION  + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COL_VALUE_POTION + " INTEGER, "
-            + COL_PHOTO_POTION + "  TEXT)";
+            + COL_VALUE_POTION + " INTEGER)";
 
     public static final String TABLE_CREATURE = "table_CREATURE";
     public static final String COL_ID_CREATURE ="CREATURE_id";
     public static final String COL_NAME_CREATURE ="CREATURE_name";
-    public static final String COL_LIFE_CREATURE ="CREATURE_life";
     public static final String COL_PTATTACK_CREATURE ="CREATURE_ptAttack";
     public static final String COL_PTDEFENSE_CREATURE ="CREATURE_ptDefense";
     public static final String COL_PHOTO_CREATURE = "CREATURE_photo";
@@ -45,7 +43,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final String CREATE_TABLE_CREATURE = "CREATE TABLE " + TABLE_CREATURE + "("
             + COL_ID_CREATURE + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_NAME_CREATURE + " TEXT UNIQUE, "
-            + COL_LIFE_CREATURE + " INTEGER, "
             + COL_PTATTACK_CREATURE + " INTEGER NOT NULL, "
             + COL_PTDEFENSE_CREATURE + " INTEGER NOT NULL,"
             + COL_PHOTO_CREATURE + "  TEXT)";

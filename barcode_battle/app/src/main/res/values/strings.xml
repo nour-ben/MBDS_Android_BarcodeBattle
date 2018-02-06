@@ -2,14 +2,9 @@
     <string name="app_name">BARCODE BATTLE</string>
 
     <!-- MENU -->
-    <string name="menu_share">Partager</string>
-    <string name="menu_settings">Paramètres</string>
-    <string name="menu_help">Aide</string>
-    <string name="menu_login">Connexion</string>
-    <string name="menu_card">Ma carte</string>
-    <string name="ssmenu_import">Import</string>
-    <string name="ssmenu_scan">Scan</string>
-    <string name="ssmenu_sms">Envoyer</string>
+    <string name="menu_scan">Scanner</string>
+    <string name="menu_list">Mes items</string>
+    <string name="menu_poweroff">Déconnexion</string>
 
     <!-- Combat .BattleActivity -->
     <string name="attack">ATTAQUE</string>
@@ -21,28 +16,10 @@
     <string name="creature">CREATURES</string>
 
     <!-- LOGIN .MainActivity -->
-    <string name="login">AUTHENTIFICATION</string>
-    <string name="connection">CONNEXION</string>
-    <string name="create_account">S\'inscrire</string>
-
-
-    <!-- REGISTER .RegisterActivity -->
-    <string name="title_register">INSCRIPTION</string>
-    <string name="title_editing">MODIFICATION</string>
-    <string name="button_register">GENERER</string>
-    <string name="button_editing">MODIFIER</string>
-    <string name="pseudo">pseudo</string>
-    <string name="pseudo_mandatory">pseudo *</string>
-    <string name="mail">email</string>
-    <string name="mail_verification">email (vérification)</string>
-    <string name="password">mot de passe</string>
-    <string name="password_verification">mot de passe (vérification)</string>
+    <string name="local">COMBAT LOCAL</string>
+    <string name="reseau">COMBAT EN RESEAU</string>
 
     <!-- TOAST MESSAGE -->
     <string name="pbConnection">Veuillez vous connectez ou vous inscrire</string>
-    <string name="pbPassword">Mot de passe : 6 caractères minimum</string>
-    <string name="pbLogin">Couple email / mot de passe incorrect</string>
-    <string name="pbPseudo">pseudo : 2 à 20 caractères</string>
-    <string name="pbMail">email : format xxx@xxx.xx</string>
 
 </resources>

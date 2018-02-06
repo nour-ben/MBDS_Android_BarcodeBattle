@@ -2,12 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_scan" android:icon="@drawable/ic_scan"
+    <item android:id="@+id/action_add" android:icon="@android:drawable/ic_menu_add"
         android:orderInCategory="100" app:showAsAction="always"
         android:title="@string/menu_scan" />
 
-    <item android:id="@+id/action_list" android:icon="@android:drawable/ic_dialog_dialer"
-        android:orderInCategory="100" app:showAsAction="always"
-        android:title="@string/menu_list" />
 
 </menu>
