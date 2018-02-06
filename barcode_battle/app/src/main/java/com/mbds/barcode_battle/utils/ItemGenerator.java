@@ -18,13 +18,13 @@ public class ItemGenerator {
     public static void init () {
 
         // CREATURES
-        Creature c1 = new Creature("PikaCacahuète", 100, 100, "1.png");
-        Creature c2 = new Creature("PikaChurros", 100, 100, "2.png");
-        Creature c3 = new Creature("Gaufrichu", 100, 100, "3.png");
-        Creature c4 = new Creature("Framboichu", 100, 100, "4.png");
-        Creature c5 = new Creature("Pikachette", 100, 100, "5.png");
-        Creature c6 = new Creature("Crèpachu", 100, 100, "6.png");
-        Creature c7 = new Creature("Beignechu", 100, 100, "7.png");
+        Creature c1 = new Creature("PikaCacahuète", 100, 100, "p1.png");
+        Creature c2 = new Creature("PikaChurros", 100, 100, "p2.png");
+        Creature c3 = new Creature("Gaufrichu", 100, 100, "p3.png");
+        Creature c4 = new Creature("Framboichu", 100, 100, "p4.png");
+        Creature c5 = new Creature("Pikachette", 100, 100, "p5.png");
+        Creature c6 = new Creature("Crèpachu", 100, 100, "p6.png");
+        Creature c7 = new Creature("Beignechu", 100, 100, "p7.png");
 
         itemList.put(1, c1);
         itemList.put(2, c2);
