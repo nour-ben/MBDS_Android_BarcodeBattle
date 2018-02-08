@@ -30,13 +30,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ItemGenerator.init();
+
         // Lancement d'un combat en local
         btn_local = (Button) findViewById(R.id.local_button);
         btn_local.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, BattleActivity.class);
+                startActivity(intent);
             }
         });
 

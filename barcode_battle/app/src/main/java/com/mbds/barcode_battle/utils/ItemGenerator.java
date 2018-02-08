@@ -14,7 +14,14 @@ import java.util.Random;
 
 public class ItemGenerator {
 
-    private static HashMap<Integer, Object> itemList = new HashMap<>();
+    public static final String CREATURE = "Créature";
+    public static final String EQUIPMENT = "Equipement";
+    public static final String POTION = "Potion";
+
+    private static HashMap<Integer, Creature> creaturesList = new HashMap<>();
+    private static HashMap<Integer, Equipment> equipmentsList = new HashMap<>();
+    private static HashMap<Integer, Potion> potionsList = new HashMap<>();
+
 
     public static void init () {
 
@@ -27,13 +34,13 @@ public class ItemGenerator {
         Creature c6 = new Creature("Crèpachu", 100, 100, R.drawable.p6);
         Creature c7 = new Creature("Beignechu", 100, 100, R.drawable.p7);
 
-        itemList.put(1, c1);
-        itemList.put(2, c2);
-        itemList.put(3, c3);
-        itemList.put(4, c4);
-        itemList.put(5, c5);
-        itemList.put(6, c6);
-        itemList.put(7, c7);
+        creaturesList.put(1, c1);
+        creaturesList.put(2, c2);
+        creaturesList.put(3, c3);
+        creaturesList.put(4, c4);
+        creaturesList.put(5, c5);
+        creaturesList.put(6, c6);
+        creaturesList.put(7, c7);
 
 
         // EQUIPMENTS
@@ -42,10 +49,10 @@ public class ItemGenerator {
         Equipment e3 = new Equipment("Attaque éclair", "Attaque", 60, "");
         Equipment e4 = new Equipment("Marmite", "Défense", 30, "");
 
-        itemList.put(8, e1);
-        itemList.put(9, e2);
-        itemList.put(10, e3);
-        itemList.put(11, e4);
+        equipmentsList.put(1, e1);
+        equipmentsList.put(2, e2);
+        equipmentsList.put(3, e3);
+        equipmentsList.put(4, e4);
 
 
         // POTIONS
@@ -53,21 +60,44 @@ public class ItemGenerator {
         Potion p2 = new Potion(50);
         Potion p3 = new Potion(25);
 
-        itemList.put(12, p1);
-        itemList.put(13, p2);
-        itemList.put(14, p3);
+        potionsList.put(1, p1);
+        potionsList.put(2, p2);
+        potionsList.put(3, p3);
 
     }
 
 
     public static Object generator(Long i) {
 
-        if(i == null) {
+        if(i == null)
             return null;
-        }
-        System.out.println("le id est "+(int) (long) i%itemList.size());
-        return itemList.get((int) (long) i%itemList.size());
 
+        int type = (int) (long) i%3;
+
+        switch (type) {
+            case 0 : return creaturesList.get((int) (long) i%creaturesList.size());
+            case 1 : return equipmentsList.get((int) (long) i%equipmentsList.size());
+            case 2 : return potionsList.get((int) (long) i%potionsList.size());
+        }
+
+        return 0;
+    }
+
+    public static Object generator(String type) {
+
+        Random random = new Random();
+        int i;
+
+        switch (type) {
+            case CREATURE:  i = random.nextInt(creaturesList.size());
+                            return creaturesList.get(i);
+            case EQUIPMENT :    i = random.nextInt(equipmentsList.size());
+                                return equipmentsList.get(i);
+            case POTION :   i = random.nextInt(potionsList.size());
+                            return potionsList.get(i);
+        }
+
+        return 0;
     }
 
 }

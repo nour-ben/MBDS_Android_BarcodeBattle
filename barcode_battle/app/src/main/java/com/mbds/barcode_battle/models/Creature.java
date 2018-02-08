@@ -107,4 +107,9 @@ public class Creature implements Parcelable {
     public void setPhoto(int photo) {
         this.photo = photo;
     }
+
+    @Override
+    public String toString(){
+        return getName() + " - Vie : " + getLife() + " - ATTAQUE : " + getPtAttack() + " - DEFENSE : " + getPtDefense();
+    }
 }

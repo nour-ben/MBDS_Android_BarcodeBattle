@@ -7,8 +7,11 @@
     <string name="menu_poweroff">Déconnexion</string>
 
     <!-- Combat .BattleActivity -->
-    <string name="attack">ATTAQUE</string>
-    <string name="defense">DEFENSE</string>
+    <string name="attack_point">POINT D'ATTAQUE</string>
+    <string name="attack">ATTAQUER</string>
+    <string name="life">POINT DE VIE</string>
+    <string name="defense_point">POINT DE DEFENSE</string>
+    <string name="defense">DEFENDRE</string>
 
     <!-- Combat .List -->
     <string name="equipement">EQUIPEMENTS</string>
