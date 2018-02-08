@@ -3,8 +3,6 @@ package com.mbds.barcode_battle.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-
 /**
  * Created by nour_b on 24/10/2017.
  */
@@ -15,11 +13,11 @@ public class Creature implements Parcelable {
     int life;
     int ptAttack;
     int ptDefense;
-    String photo;
+    int photo;
 
     public Creature() {}
 
-    public Creature(String name, int ptAttack, int ptDefense, String photo) {
+    public Creature(String name, int ptAttack, int ptDefense, int photo) {
         this.name = name;
         this.ptAttack = ptAttack;
         this.ptDefense = ptDefense;
@@ -33,7 +31,7 @@ public class Creature implements Parcelable {
         life = in.readInt();
         ptAttack = in.readInt();
         ptDefense = in.readInt();
-        photo = in.readString();
+        photo = in.readInt();
     }
 
     public static final Creator<Creature> CREATOR = new Creator<Creature>() {
@@ -59,7 +57,7 @@ public class Creature implements Parcelable {
         dest.writeInt(life);
         dest.writeInt(ptAttack);
         dest.writeInt(ptDefense);
-        dest.writeString(photo);
+        dest.writeInt(photo);
     }
 
     public String getName() {
@@ -102,11 +100,11 @@ public class Creature implements Parcelable {
         this.ptDefense = ptDefense;
     }
 
-    public String getPhoto() {
+    public int getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(int photo) {
         this.photo = photo;
     }
 }

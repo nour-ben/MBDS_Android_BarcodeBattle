@@ -198,8 +198,8 @@ public class DBHandler {
                 null, null, null, null);
         if (c != null) {
             c.moveToFirst();
-            Creature creature = new Creature(c.getString(0), c.getInt(1), c.getInt(2), c.getString(3));
-            creature.setPhoto(c.getString(3));
+            Creature creature = new Creature(c.getString(0), c.getInt(1), c.getInt(2), c.getInt(3));
+            creature.setPhoto(c.getInt(3));
             creature.setEquipment(readEquipment(c.getString(4)));
             c.close(); // close the cursor
             return creature;

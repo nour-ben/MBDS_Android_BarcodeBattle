@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final String CREATE_TABLE_CREATURE = "CREATE TABLE " + TABLE_CREATURE + "("
             + COL_ID_CREATURE + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COL_NAME_CREATURE + " TEXT UNIQUE, "
+            + COL_NAME_CREATURE + " TEXT , "
             + COL_PTATTACK_CREATURE + " INTEGER NOT NULL, "
             + COL_PTDEFENSE_CREATURE + " INTEGER NOT NULL,"
             + COL_PHOTO_CREATURE + "  TEXT)";

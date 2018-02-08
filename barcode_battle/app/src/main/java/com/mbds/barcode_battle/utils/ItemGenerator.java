@@ -1,5 +1,6 @@
 package com.mbds.barcode_battle.utils;
 
+import com.mbds.barcode_battle.R;
 import com.mbds.barcode_battle.models.Creature;
 import com.mbds.barcode_battle.models.Equipment;
 import com.mbds.barcode_battle.models.Potion;
@@ -13,18 +14,18 @@ import java.util.Random;
 
 public class ItemGenerator {
 
-    private static HashMap<Integer, Object> itemList;
+    private static HashMap<Integer, Object> itemList = new HashMap<>();
 
     public static void init () {
 
         // CREATURES
-        Creature c1 = new Creature("PikaCacahuète", 100, 100, "p1.png");
-        Creature c2 = new Creature("PikaChurros", 100, 100, "p2.png");
-        Creature c3 = new Creature("Gaufrichu", 100, 100, "p3.png");
-        Creature c4 = new Creature("Framboichu", 100, 100, "p4.png");
-        Creature c5 = new Creature("Pikachette", 100, 100, "p5.png");
-        Creature c6 = new Creature("Crèpachu", 100, 100, "p6.png");
-        Creature c7 = new Creature("Beignechu", 100, 100, "p7.png");
+        Creature c1 = new Creature("PikaCacahuète", 100, 100, R.drawable.p1);
+        Creature c2 = new Creature("PikaChurros", 100, 100,R.drawable.p2);
+        Creature c3 = new Creature("Gaufrichu", 100, 100, R.drawable.p3);
+        Creature c4 = new Creature("Framboichu", 100, 100, R.drawable.p4);
+        Creature c5 = new Creature("Pikachette", 100, 100,R.drawable.p5);
+        Creature c6 = new Creature("Crèpachu", 100, 100, R.drawable.p6);
+        Creature c7 = new Creature("Beignechu", 100, 100, R.drawable.p7);
 
         itemList.put(1, c1);
         itemList.put(2, c2);
@@ -59,9 +60,13 @@ public class ItemGenerator {
     }
 
 
-    public static Object generator(int i) {
+    public static Object generator(Long i) {
 
-        return itemList.get(i%itemList.size());
+        if(i == null) {
+            return null;
+        }
+        System.out.println("le id est "+(int) (long) i%itemList.size());
+        return itemList.get((int) (long) i%itemList.size());
 
     }
 
