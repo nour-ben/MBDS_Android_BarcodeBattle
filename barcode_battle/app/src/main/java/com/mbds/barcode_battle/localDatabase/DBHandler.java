@@ -59,15 +59,15 @@ public class DBHandler {
         open();
         Cursor c = db.query(DatabaseHelper.TABLE_EQUIPMENT,
                 new String[]{   DatabaseHelper.COL_NAME_EQUIPMENT, DatabaseHelper.COL_TYPE_EQUIPMENT,
-                                DatabaseHelper.COL_VALUE_EQUIPMENT, DatabaseHelper.COL_PHOTO_EQUIPMENT
+                        DatabaseHelper.COL_VALUE_EQUIPMENT, DatabaseHelper.COL_PHOTO_EQUIPMENT
                 },
                 DatabaseHelper.COL_NAME_EQUIPMENT + " = ?",
                 new String[] { name },
                 null, null, null, null);
         if (c != null) {
             c.moveToFirst();
-            Equipment equipment = new Equipment(c.getString(0), c.getString(1), c.getInt(2), c.getString(3));
-            equipment.setPhoto(c.getString(2));
+            Equipment equipment = new Equipment(c.getString(0), c.getString(1), c.getInt(2), c.getInt(3));
+            equipment.setPhoto(c.getInt(2));
             c.close(); // close the cursor
             return equipment;
         }
@@ -78,9 +78,9 @@ public class DBHandler {
     public ArrayList<HashMap<String,String>> readAllEquipments () {
         open();
         ArrayList<HashMap<String,String>> equipments = new ArrayList<HashMap<String,String>>();
-        Cursor c = db.query(DatabaseHelper.TABLE_CREATURE,
+        Cursor c = db.query(DatabaseHelper.TABLE_EQUIPMENT,
                 new String[]{   DatabaseHelper.COL_NAME_EQUIPMENT, DatabaseHelper.COL_TYPE_EQUIPMENT,
-                                DatabaseHelper.COL_VALUE_EQUIPMENT, DatabaseHelper.COL_PHOTO_EQUIPMENT
+                        DatabaseHelper.COL_VALUE_EQUIPMENT, DatabaseHelper.COL_PHOTO_EQUIPMENT
                 },
                 null, null, null, null, null, null);
         if (c != null)  {
@@ -191,7 +191,7 @@ public class DBHandler {
         open();
         Cursor c = db.query(DatabaseHelper.TABLE_CREATURE,
                 new String[]{   DatabaseHelper.COL_NAME_CREATURE, DatabaseHelper.COL_PTATTACK_CREATURE,
-                                DatabaseHelper.COL_PTDEFENSE_CREATURE, DatabaseHelper.COL_PHOTO_CREATURE
+                        DatabaseHelper.COL_PTDEFENSE_CREATURE, DatabaseHelper.COL_PHOTO_CREATURE
                 },
                 DatabaseHelper.COL_NAME_CREATURE + " = ?",
                 new String[] { name },

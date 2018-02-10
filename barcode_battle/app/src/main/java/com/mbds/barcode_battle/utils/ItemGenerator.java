@@ -44,10 +44,10 @@ public class ItemGenerator {
 
 
         // EQUIPMENTS
-        Equipment e1 = new Equipment("Bouclier", "Défense", 20, "");
-        Equipment e2 = new Equipment("Sabre laser", "Attaque", 40, "");
-        Equipment e3 = new Equipment("Attaque éclair", "Attaque", 60, "");
-        Equipment e4 = new Equipment("Marmite", "Défense", 30, "");
+        Equipment e1 = new Equipment("Bouclier", "Défense", 20, R.drawable.p1);
+        Equipment e2 = new Equipment("Sabre laser", "Attaque", 40, R.drawable.p1);
+        Equipment e3 = new Equipment("Attaque éclair", "Attaque", 60, R.drawable.p1);
+        Equipment e4 = new Equipment("Marmite", "Défense", 30, R.drawable.p1);
 
         equipmentsList.put(1, e1);
         equipmentsList.put(2, e2);
@@ -72,12 +72,12 @@ public class ItemGenerator {
         if(i == null)
             return null;
 
-        int type = (int) (long) i%3;
+        int type = 0;//Math.abs((int) (long) i%3);
 
         switch (type) {
-            case 0 : return creaturesList.get((int) (long) i%creaturesList.size());
-            case 1 : return equipmentsList.get((int) (long) i%equipmentsList.size());
-            case 2 : return potionsList.get((int) (long) i%potionsList.size());
+            case 0 : return creaturesList.get(Math.abs((int) (long) i%creaturesList.size()));
+            case 1 : return equipmentsList.get(Math.abs((int) (long) i%equipmentsList.size()));
+            case 2 : return potionsList.get(Math.abs((int) (long) i%potionsList.size()));
         }
 
         return 0;

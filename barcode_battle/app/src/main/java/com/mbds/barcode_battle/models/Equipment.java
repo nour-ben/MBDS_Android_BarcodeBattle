@@ -13,11 +13,11 @@ public class Equipment implements Parcelable{
     String name;
     String type;
     int value;
-    String photo;
+    int photo;
 
     public Equipment() {}
 
-    public Equipment(String name, String effect, int value, String photo) {
+    public Equipment(String name, String effect, int value, int photo) {
         this.name = name;
         this.type = effect;
         this.value = value;
@@ -29,7 +29,7 @@ public class Equipment implements Parcelable{
         name = in.readString();
         type = in.readString();
         value = in.readInt();
-        photo = in.readString();
+        photo = in.readInt();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Equipment implements Parcelable{
         dest.writeString(name);
         dest.writeString(type);
         dest.writeInt(value);
-        dest.writeString(photo);
+        dest.writeInt(photo);
     }
 
     @Override
@@ -65,11 +65,11 @@ public class Equipment implements Parcelable{
         this.name = name;
     }
 
-    public String getPhoto() {
+    public int getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(int photo) {
         this.photo = photo;
     }
 

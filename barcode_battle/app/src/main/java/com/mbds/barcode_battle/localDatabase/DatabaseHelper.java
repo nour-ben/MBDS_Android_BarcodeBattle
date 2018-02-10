@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COL_NAME_EQUIPMENT + " TEXT, "
             + COL_TYPE_EQUIPMENT + " TEXT, "
             + COL_VALUE_EQUIPMENT + " INTEGER, "
-            + COL_PHOTO_EQUIPMENT + "  TEXT)";
+            + COL_PHOTO_EQUIPMENT + "  INTEGER)";
 
     public static final String TABLE_POTION = "table_POTION";
     public static final String COL_ID_POTION ="POTION_id";
@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COL_NAME_CREATURE + " TEXT , "
             + COL_PTATTACK_CREATURE + " INTEGER NOT NULL, "
             + COL_PTDEFENSE_CREATURE + " INTEGER NOT NULL,"
-            + COL_PHOTO_CREATURE + "  TEXT)";
+            + COL_PHOTO_CREATURE + "  INTEGER)";
 
     /**
      * Create a helper object to create, open, and/or manage a database.
