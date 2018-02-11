@@ -1,4 +1,4 @@
-package com.mbds.barcode_battle.utils;
+package com.mbds.barcode_battle.controllers;
 
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -14,10 +14,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mbds.barcode_battle.BattleActivity;
-import com.mbds.barcode_battle.MainActivity;
+import com.mbds.barcode_battle.controllers.BattleActivity;
+import com.mbds.barcode_battle.controllers.MainActivity;
 import com.mbds.barcode_battle.R;
 import com.mbds.barcode_battle.models.Creature;
+import com.mbds.barcode_battle.utils.AcceptThreadServer;
+import com.mbds.barcode_battle.utils.ItemGenerator;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -134,7 +136,7 @@ public class BattleActivityReseau extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_login) {
-            Intent intent = new Intent(BattleActivity.this, MainActivity.class);
+            Intent intent = new Intent(BattleActivityReseau.this, MainActivity.class);
             startActivity(intent);
             finish();
             return true;

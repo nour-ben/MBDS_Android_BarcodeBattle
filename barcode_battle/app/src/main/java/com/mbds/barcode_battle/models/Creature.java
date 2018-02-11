@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 public class Creature implements Parcelable {
+    int id = -1;
     String name;
     Equipment equipment;
     int life;
@@ -23,11 +24,21 @@ public class Creature implements Parcelable {
         this.ptDefense = ptDefense;
         this.life = 100;
         this.photo = photo;
-      //  this.equipment = new Equipment();
     }
 
-    public Creature(Parcel in) {
+    public Creature(int id, String name, int ptAttack, int ptDefense, int photo) {
+        this.id = id;
+        this.name = name;
+        this.ptAttack = ptAttack;
+        this.ptDefense = ptDefense;
+        this.life = 100;
+        this.photo = photo;
+    }
+
+    protected Creature(Parcel in) {
+        id = in.readInt();
         name = in.readString();
+        equipment = in.readParcelable(Equipment.class.getClassLoader());
         life = in.readInt();
         ptAttack = in.readInt();
         ptDefense = in.readInt();
@@ -53,12 +64,15 @@ public class Creature implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(name);
+        dest.writeParcelable(equipment, flags);
         dest.writeInt(life);
         dest.writeInt(ptAttack);
         dest.writeInt(ptDefense);
         dest.writeInt(photo);
     }
+
 
     public String getName() {
         return name;
@@ -110,6 +124,14 @@ public class Creature implements Parcelable {
 
     @Override
     public String toString(){
-        return getName() + " - Vie : " + getLife() + " - ATTAQUE : " + getPtAttack() + " - DEFENSE : " + getPtDefense();
+        return getName() + " - Vie : " + getLife() + " - ATTAQUE : " + getPtAttack() + " - DEFENSE : " + getPtDefense()+ " - photo : " + getPhoto();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -25,13 +25,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COL_PHOTO_EQUIPMENT + "  INTEGER)";
 
     public static final String TABLE_POTION = "table_POTION";
-    public static final String COL_ID_POTION ="POTION_id";
+    public static final String COL_ID_POTION = "POTION_id";
     public static final String COL_VALUE_POTION ="POTION_value";
     public static final String COL_PHOTO_POTION = "POTION_photo";
 
     private final String CREATE_TABLE_POTION = "CREATE TABLE " + TABLE_POTION + "("
             + COL_ID_POTION  + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COL_VALUE_POTION + " INTEGER)";
+            + COL_VALUE_POTION + " INTEGER,"
+            + COL_PHOTO_POTION + "  INTEGER)";
 
     public static final String TABLE_CREATURE = "table_CREATURE";
     public static final String COL_ID_CREATURE ="CREATURE_id";

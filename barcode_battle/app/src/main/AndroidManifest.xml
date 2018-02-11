@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mbds.barcode_battle">
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".controllers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BattleActivity" android:screenOrientation="landscape" />
-        <activity android:name=".BattleActivityReseau" android:screenOrientation="landscape" />
-        <activity android:name=".ListActivity"></activity>
+        <activity
+            android:name=".controllers.BattleActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".controllers.ItemsListActivity" />
+        <activity android:name=".controllers.ItemActivity"></activity>
+        <activity android:name=".controllers.BattleActivityReseau" android:screenOrientation="landscape" />
+
     </application>
 
 </manifest>

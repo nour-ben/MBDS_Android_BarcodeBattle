@@ -7,22 +7,30 @@
     <string name="menu_poweroff">Déconnexion</string>
 
     <!-- Combat .BattleActivity -->
-    <string name="attack_point">POINT D'ATTAQUE</string>
-    <string name="attack">ATTAQUER</string>
-    <string name="life">POINT DE VIE</string>
-    <string name="defense_point">POINT DE DEFENSE</string>
-    <string name="defense">DEFENDRE</string>
+    <string name="attack">ATTAQUE</string>
+    <string name="life">VIE</string>
+    <string name="defense">DEFENSE</string>
+    <string name="type">TYPE</string>
+    <string name="value">VALEUR</string>
 
     <!-- Combat .List -->
-    <string name="equipement">EQUIPEMENTS</string>
+    <string name="equipment">EQUIPEMENTS</string>
     <string name="potion">POTIONS</string>
     <string name="creature">CREATURES</string>
 
     <!-- LOGIN .MainActivity -->
+    <string name="play">JOUER</string>
     <string name="local">COMBAT LOCAL</string>
     <string name="reseau">COMBAT EN RESEAU</string>
 
     <!-- TOAST MESSAGE -->
     <string name="pbConnection">Veuillez vous connectez ou vous inscrire</string>
+    <string name="title_activity_items">ItemsActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_item_groups">ItemGroupsActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

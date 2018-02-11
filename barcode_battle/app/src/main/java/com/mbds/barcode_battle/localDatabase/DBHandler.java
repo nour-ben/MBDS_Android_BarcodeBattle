@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Parcelable;
 
 import com.mbds.barcode_battle.models.Creature;
 import com.mbds.barcode_battle.models.Equipment;
@@ -43,7 +44,6 @@ public class DBHandler {
 
 
     public void createEquipment (Equipment equipment) {
-        open();
         if (equipment != null  ) {
             ContentValues store = new ContentValues();
             store.put(DatabaseHelper.COL_NAME_EQUIPMENT, equipment.getName());
@@ -52,44 +52,40 @@ public class DBHandler {
             store.put(DatabaseHelper.COL_PHOTO_EQUIPMENT, equipment.getPhoto());
             db.insert(DatabaseHelper.TABLE_EQUIPMENT, null, store);
         }
-        close();
     }
 
-    public Equipment readEquipment (String name) {
-        open();
+    public Equipment readEquipment (int id) {
         Cursor c = db.query(DatabaseHelper.TABLE_EQUIPMENT,
                 new String[]{   DatabaseHelper.COL_NAME_EQUIPMENT, DatabaseHelper.COL_TYPE_EQUIPMENT,
-                        DatabaseHelper.COL_VALUE_EQUIPMENT, DatabaseHelper.COL_PHOTO_EQUIPMENT
+                                DatabaseHelper.COL_VALUE_EQUIPMENT, DatabaseHelper.COL_PHOTO_EQUIPMENT
                 },
-                DatabaseHelper.COL_NAME_EQUIPMENT + " = ?",
-                new String[] { name },
+                DatabaseHelper.COL_ID_EQUIPMENT + " = ?",
+                new String[] { String.valueOf(id) },
                 null, null, null, null);
         if (c != null) {
             c.moveToFirst();
-            Equipment equipment = new Equipment(c.getString(0), c.getString(1), c.getInt(2), c.getInt(3));
-            equipment.setPhoto(c.getInt(2));
+            Equipment equipment = new Equipment(id, c.getString(0), c.getString(1), c.getInt(2), c.getInt(3));
             c.close(); // close the cursor
             return equipment;
         }
-        close();
         return null;
     }
 
     public ArrayList<HashMap<String,String>> readAllEquipments () {
-        open();
         ArrayList<HashMap<String,String>> equipments = new ArrayList<HashMap<String,String>>();
         Cursor c = db.query(DatabaseHelper.TABLE_EQUIPMENT,
-                new String[]{   DatabaseHelper.COL_NAME_EQUIPMENT, DatabaseHelper.COL_TYPE_EQUIPMENT,
-                        DatabaseHelper.COL_VALUE_EQUIPMENT, DatabaseHelper.COL_PHOTO_EQUIPMENT
+                new String[]{   DatabaseHelper.COL_ID_EQUIPMENT, DatabaseHelper.COL_NAME_EQUIPMENT, DatabaseHelper.COL_TYPE_EQUIPMENT,
+                                DatabaseHelper.COL_VALUE_EQUIPMENT, DatabaseHelper.COL_PHOTO_EQUIPMENT
                 },
                 null, null, null, null, null, null);
         if (c != null)  {
             for(c.moveToFirst(); c.isAfterLast() == false; c.moveToNext()) {   // add items to the list
                 HashMap<String,String> equipment = new HashMap<String, String>();
-                equipment.put(DatabaseHelper.COL_NAME_EQUIPMENT, c.getString(0));
-                equipment.put(DatabaseHelper.COL_TYPE_EQUIPMENT, c.getString(1));
-                equipment.put(DatabaseHelper.COL_VALUE_EQUIPMENT, c.getString(2));
-                equipment.put(DatabaseHelper.COL_PHOTO_EQUIPMENT, c.getString(3));
+                equipment.put(DatabaseHelper.COL_ID_EQUIPMENT, c.getString(0));
+                equipment.put(DatabaseHelper.COL_NAME_EQUIPMENT, c.getString(1));
+                equipment.put(DatabaseHelper.COL_TYPE_EQUIPMENT, c.getString(2));
+                equipment.put(DatabaseHelper.COL_VALUE_EQUIPMENT, c.getString(3));
+                equipment.put(DatabaseHelper.COL_PHOTO_EQUIPMENT, c.getString(4));
                 equipments.add(equipment);
             }
             c.close(); // close the cursor
@@ -98,31 +94,12 @@ public class DBHandler {
         return null;
     }
 
-    public void deleteEquipment (String name) {
-        open();
-        db.delete(DatabaseHelper.TABLE_EQUIPMENT, DatabaseHelper.COL_NAME_EQUIPMENT + "= ?", new String[]{ name });
-        close();
+    public void deleteEquipment (int id) {
+        db.delete(DatabaseHelper.TABLE_EQUIPMENT, DatabaseHelper.COL_ID_EQUIPMENT + "= ?", new String[]{ String.valueOf(id) });
     }
 
     public void deleteAllEquipments(){
         db.delete(DatabaseHelper.TABLE_EQUIPMENT, null, null);
-    }
-
-    public int getEquipmentId (String name) {
-        open();
-        Cursor c = db.query(DatabaseHelper.TABLE_EQUIPMENT,
-                new String[]{   DatabaseHelper.COL_ID_EQUIPMENT },
-                DatabaseHelper.COL_NAME_EQUIPMENT + " = ?",
-                new String[] { name },
-                null, null, null, null);
-        if (c != null) {
-            c.moveToFirst();
-            int id = c.getInt(0);
-            c.close(); // close the cursor
-            return id;
-        }
-        close();
-        return -1;
     }
 
 
@@ -131,25 +108,41 @@ public class DBHandler {
     //////////////////////////////////////////////////////////////////////
 
     public void createPotion (Potion potion) {
-        open();
         if (potion != null  ) {
             ContentValues store = new ContentValues();
             store.put(DatabaseHelper.COL_VALUE_POTION, potion.getValue());
+            store.put(DatabaseHelper.COL_PHOTO_POTION, potion.getPhoto());
             db.insert(DatabaseHelper.TABLE_POTION, null, store);
         }
-        close();
+    }
+
+    public Potion readPotion (int id) {
+        Cursor c = db.query(DatabaseHelper.TABLE_POTION,
+                new String[]{   DatabaseHelper.COL_VALUE_POTION, DatabaseHelper.COL_PHOTO_POTION
+                },
+                DatabaseHelper.COL_ID_POTION + " = ?",
+                new String[] { Integer.toString(id) },
+                null, null, null, null);
+        if (c != null) {
+            c.moveToFirst();
+            Potion potion = new Potion(id, c.getInt(0), c.getInt(1));
+            c.close(); // close the cursor
+            return potion;
+        }
+        return null;
     }
 
     public ArrayList<HashMap<String,String>> readAllPotions () {
-        open();
         ArrayList<HashMap<String,String>> potions = new ArrayList<HashMap<String,String>>();
         Cursor c = db.query(DatabaseHelper.TABLE_POTION,
-                new String[]{   DatabaseHelper.COL_VALUE_POTION },
+                new String[]{   DatabaseHelper.COL_ID_POTION, DatabaseHelper.COL_VALUE_POTION, DatabaseHelper.COL_PHOTO_POTION },
                 null, null, null, null, null, null);
         if (c != null)  {
             for(c.moveToFirst(); c.isAfterLast() == false; c.moveToNext()) {   // add items to the list
                 HashMap<String,String> potion = new HashMap<String, String>();
-                potion.put(DatabaseHelper.COL_VALUE_POTION, c.getString(0));
+                potion.put(DatabaseHelper.COL_ID_POTION, c.getString(0));
+                potion.put(DatabaseHelper.COL_VALUE_POTION, c.getString(1));
+                potion.put(DatabaseHelper.COL_PHOTO_POTION, c.getString(2));
                 potions.add(potion);
             }
             c.close(); // close the cursor
@@ -158,10 +151,8 @@ public class DBHandler {
         return null;
     }
 
-    public void deletePotion (String name) {
-        open();
-        db.delete(DatabaseHelper.TABLE_POTION, DatabaseHelper.COL_VALUE_POTION + "=?", new String[]{ name });
-        close();
+    public void deletePotion (int id) {
+        db.delete(DatabaseHelper.TABLE_POTION, DatabaseHelper.COL_ID_POTION + "=?", new String[]{ String.valueOf(id) });
     }
 
     public void deleteAllPotions(){
@@ -175,7 +166,6 @@ public class DBHandler {
 
 
     public void createCreature (Creature c) {
-        open();
         if (c != null  ) {
             ContentValues store = new ContentValues();
             store.put(DatabaseHelper.COL_NAME_CREATURE, c.getName());
@@ -184,45 +174,41 @@ public class DBHandler {
             store.put(DatabaseHelper.COL_PHOTO_CREATURE, c.getPhoto());
             db.insert(DatabaseHelper.TABLE_CREATURE, null, store);
         }
-        close();
     }
 
-    public Creature readCreature (String name) {
-        open();
+    public Creature readCreature (int id) {
         Cursor c = db.query(DatabaseHelper.TABLE_CREATURE,
                 new String[]{   DatabaseHelper.COL_NAME_CREATURE, DatabaseHelper.COL_PTATTACK_CREATURE,
-                        DatabaseHelper.COL_PTDEFENSE_CREATURE, DatabaseHelper.COL_PHOTO_CREATURE
+                                DatabaseHelper.COL_PTDEFENSE_CREATURE, DatabaseHelper.COL_PHOTO_CREATURE
                 },
-                DatabaseHelper.COL_NAME_CREATURE + " = ?",
-                new String[] { name },
+                DatabaseHelper.COL_ID_CREATURE + " = ?",
+                new String[] { String.valueOf(id) },
                 null, null, null, null);
         if (c != null) {
             c.moveToFirst();
-            Creature creature = new Creature(c.getString(0), c.getInt(1), c.getInt(2), c.getInt(3));
-            creature.setPhoto(c.getInt(3));
-            creature.setEquipment(readEquipment(c.getString(4)));
+            Creature creature = new Creature(id, c.getString(0), c.getInt(1), c.getInt(2), c.getInt(3));
             c.close(); // close the cursor
+            System.out.println(creature.toString());
             return creature;
         }
-        close();
         return null;
     }
 
     public ArrayList<HashMap<String,String>> readAllCreatures () {
-        open();
         ArrayList<HashMap<String,String>> creatures = new ArrayList<HashMap<String,String>>();
         Cursor c = db.query(DatabaseHelper.TABLE_CREATURE,
-                new String[]{   DatabaseHelper.COL_NAME_CREATURE, DatabaseHelper.COL_PTATTACK_CREATURE,
-                        DatabaseHelper.COL_PTDEFENSE_CREATURE, DatabaseHelper.COL_PHOTO_CREATURE
+                new String[]{   DatabaseHelper.COL_ID_CREATURE, DatabaseHelper.COL_NAME_CREATURE, DatabaseHelper.COL_PTATTACK_CREATURE,
+                                DatabaseHelper.COL_PTDEFENSE_CREATURE, DatabaseHelper.COL_PHOTO_CREATURE
                 },
                 null, null, null, null, null, null);
         if (c != null)  {
             for(c.moveToFirst(); c.isAfterLast() == false; c.moveToNext()) {   // add items to the list
                 HashMap<String,String> creature = new HashMap<String, String>();
-                creature.put(DatabaseHelper.COL_NAME_CREATURE, c.getString(0));
-                creature.put(DatabaseHelper.COL_PTATTACK_CREATURE, c.getString(1));
-                creature.put(DatabaseHelper.COL_PTDEFENSE_CREATURE, c.getString(2));
-                creature.put(DatabaseHelper.COL_PHOTO_CREATURE, c.getString(3));
+                creature.put(DatabaseHelper.COL_ID_CREATURE, c.getString(0));
+                creature.put(DatabaseHelper.COL_NAME_CREATURE, c.getString(1));
+                creature.put(DatabaseHelper.COL_PTATTACK_CREATURE, c.getString(2));
+                creature.put(DatabaseHelper.COL_PTDEFENSE_CREATURE, c.getString(3));
+                creature.put(DatabaseHelper.COL_PHOTO_CREATURE, c.getString(4));
                 creatures.add(creature);
             }
             c.close(); // close the cursor
@@ -232,31 +218,12 @@ public class DBHandler {
     }
 
 
-    public void deleteCreature (String name) {
-        open();
-        db.delete(DatabaseHelper.TABLE_CREATURE, DatabaseHelper.COL_NAME_CREATURE + "=?", new String[]{name});
-        close();
+    public void deleteCreature (int id) {
+        db.delete(DatabaseHelper.TABLE_CREATURE, DatabaseHelper.COL_ID_CREATURE + "=?", new String[]{Integer.toString(id)});
     }
 
     public void deleteAllCreatures(){
         db.delete(DatabaseHelper.TABLE_CREATURE, null, null);
-    }
-
-    public int getCreatureId (String name) {
-        open();
-        Cursor c = db.query(DatabaseHelper.TABLE_CREATURE,
-                new String[]{   DatabaseHelper.COL_ID_CREATURE },
-                DatabaseHelper.COL_NAME_CREATURE + " = ?",
-                new String[] { name },
-                null, null, null, null);
-        if (c != null) {
-            c.moveToFirst();
-            int id = c.getInt(0);
-            c.close(); // close the cursor
-            return id;
-        }
-        close();
-        return -1;
     }
 
 }

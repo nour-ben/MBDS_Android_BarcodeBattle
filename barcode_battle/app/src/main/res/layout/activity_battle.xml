@@ -12,7 +12,7 @@
         android:layout_marginStart="10dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
@@ -34,29 +34,29 @@
                 android:id="@+id/life_enemy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:gravity="right" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/attack_point" />
+                android:text="@string/attack" />
 
             <TextView
                 android:id="@+id/attaque_enemy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:gravity="right" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/defense_point" />
+                android:text="@string/defense" />
 
             <TextView
                 android:id="@+id/defense_enemy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"/>
+                android:gravity="right"/>
 
         </LinearLayout>
 
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -89,7 +89,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/attack_point" />
+                android:text="@string/attack" />
 
             <TextView
                 android:id="@+id/attaque_myself"
@@ -99,7 +99,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/defense_point" />
+                android:text="@string/defense" />
 
             <TextView
                 android:id="@+id/defense_myself"
@@ -111,7 +111,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="253dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
@@ -129,8 +129,9 @@
                 <ImageView
                     android:id="@+id/cadre_enemy"
                     android:layout_width="fill_parent"
-                    android:layout_height="130dp"
-                    android:src="@drawable/cadre" />
+                    android:layout_height="120dp"
+                    android:src="@drawable/cadre"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/battle_enemy"
@@ -157,8 +158,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -166,14 +167,15 @@
 
                 <ImageView
                     android:id="@+id/cadre_myself"
-                    android:layout_width="167dp"
-                    android:layout_height="126dp"
-                    android:src="@drawable/cadre" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/cadre"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/battle_myself"
-                    android:layout_width="167dp"
-                    android:layout_height="119dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="110dp"
                     android:src="@drawable/unknown_body" />
 
             </FrameLayout>
@@ -191,7 +193,7 @@
         android:layout_marginEnd="20dp">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/tour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TOUR 1"
@@ -224,7 +226,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
                 android:src="@drawable/equipment"
-                android:text="@string/equipement" />
+                android:text="@string/equipment" />
 
             <ImageButton
                 android:id="@+id/battle_potion"

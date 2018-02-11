@@ -1,6 +1,6 @@
-package com.mbds.barcode_battle;
+package com.mbds.barcode_battle.controllers;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,12 +13,13 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.mbds.barcode_battle.R;
 import com.mbds.barcode_battle.localDatabase.DBHandler;
 import com.mbds.barcode_battle.models.Creature;
 import com.mbds.barcode_battle.models.Equipment;
 import com.mbds.barcode_battle.models.Potion;
 import com.mbds.barcode_battle.utils.ItemGenerator;
-import com.mbds.barcode_battle.utils.Service;
+import com.mbds.barcode_battle.utils.ScanHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,27 +31,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ItemGenerator.init();
+        ItemGenerator.init(getApplicationContext());
 
         // Lancement d'un combat en local
         btn_local = (Button) findViewById(R.id.local_button);
         btn_local.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BattleActivity.class);
+                Intent intent = new Intent(MainActivity.this, ItemsListActivity.class);
+                intent.putExtra("DISPLAY", ItemGenerator.CREATURE);
                 startActivity(intent);
             }
         });
 
-        // Lancement d'un combat en réseau
-        btn_reseau = (Button) findViewById(R.id.reseau_button);
-        btn_reseau.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BattleActivityReseau.class);
-                startActivity(intent);
-            }
-        });
     }
 
     // Mise en place du menu dans l'ActionBar (items répertoriés dans menu_main.xml)
@@ -67,21 +60,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Ajout de créatures, potions, équipements par scan
         if (id == R.id.action_scan) {
-            final Activity activity = this;
-            Service.scanCodeBarre(activity);
+            ScanHandler.scanCodeBarre(this);
             return true;
         }
 
         // Affichage de la bibliothèque d'items scannés et stockés dans la base de données
         if (id == R.id.action_list) {
-            Intent intent = new Intent(MainActivity.this, ListActivity.class);
+            Intent intent = new Intent(MainActivity.this, ItemsListActivity.class);
+            intent.putExtra("DISPLAY", "ALL");
             startActivity(intent);
-            finish();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);

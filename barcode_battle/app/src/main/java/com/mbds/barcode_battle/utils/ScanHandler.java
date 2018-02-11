@@ -8,7 +8,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
  * Created by Yasmine on 06/02/2018.
  */
 
-public class Service {
+public class ScanHandler {
 
     public static void scanCodeBarre(Activity activity){
         IntentIntegrator integrator = new IntentIntegrator(activity);

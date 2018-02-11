@@ -1,6 +1,10 @@
 package com.mbds.barcode_battle.utils;
 
+import android.content.Context;
+
 import com.mbds.barcode_battle.R;
+import com.mbds.barcode_battle.localDatabase.DBHandler;
+import com.mbds.barcode_battle.localDatabase.DatabaseHelper;
 import com.mbds.barcode_battle.models.Creature;
 import com.mbds.barcode_battle.models.Equipment;
 import com.mbds.barcode_battle.models.Potion;
@@ -23,7 +27,7 @@ public class ItemGenerator {
     private static HashMap<Integer, Potion> potionsList = new HashMap<>();
 
 
-    public static void init () {
+    public static void init (Context context) {
 
         // CREATURES
         Creature c1 = new Creature("PikaCacahuète", 100, 100, R.drawable.p1);
@@ -42,12 +46,22 @@ public class ItemGenerator {
         creaturesList.put(6, c6);
         creaturesList.put(7, c7);
 
+        DBHandler db = new DBHandler(context);
+        db.open();
+        db.createCreature(c1);
+        db.createCreature(c2);
+        db.createCreature(c3);
+
 
         // EQUIPMENTS
         Equipment e1 = new Equipment("Bouclier", "Défense", 20, R.drawable.p1);
         Equipment e2 = new Equipment("Sabre laser", "Attaque", 40, R.drawable.p1);
         Equipment e3 = new Equipment("Attaque éclair", "Attaque", 60, R.drawable.p1);
         Equipment e4 = new Equipment("Marmite", "Défense", 30, R.drawable.p1);
+
+        db.createEquipment(e1);
+        db.createEquipment(e2);
+        db.createEquipment(e3);
 
         equipmentsList.put(1, e1);
         equipmentsList.put(2, e2);
@@ -64,6 +78,11 @@ public class ItemGenerator {
         potionsList.put(2, p2);
         potionsList.put(3, p3);
 
+        db.createPotion(p1);
+        db.createPotion(p2);
+        db.createPotion(p3);
+
+        db.close();
     }
 
 
@@ -72,7 +91,7 @@ public class ItemGenerator {
         if(i == null)
             return null;
 
-        int type = 0;//Math.abs((int) (long) i%3);
+        int type = Math.abs((int) (long) i%3);
 
         switch (type) {
             case 0 : return creaturesList.get(Math.abs((int) (long) i%creaturesList.size()));
@@ -89,12 +108,12 @@ public class ItemGenerator {
         int i;
 
         switch (type) {
-            case CREATURE:  i = random.nextInt(creaturesList.size());
-                            return creaturesList.get(i);
+            case CREATURE :     i = random.nextInt(creaturesList.size());
+                                return creaturesList.get(i);
             case EQUIPMENT :    i = random.nextInt(equipmentsList.size());
                                 return equipmentsList.get(i);
-            case POTION :   i = random.nextInt(potionsList.size());
-                            return potionsList.get(i);
+            case POTION :       i = random.nextInt(potionsList.size());
+                                return potionsList.get(i);
         }
 
         return 0;
