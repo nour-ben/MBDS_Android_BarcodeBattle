@@ -20,6 +20,12 @@
             android:textSize="14dp"
             android:textStyle="bold"/>
 
+        <TextView
+            android:id="@+id/creatures_nolist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"/>
+
         <ListView
             android:id="@+id/creatures_list"
             android:layout_marginTop="5dp"
@@ -45,6 +51,12 @@
                 android:textSize="14dp"
                 android:textStyle="bold"/>
 
+            <TextView
+                android:id="@+id/equipment_nolist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"/>
+
             <ListView
                 android:id="@+id/equipment_list"
                 android:layout_marginTop="5dp"
@@ -69,6 +81,12 @@
                 android:visibility="invisible"
                 android:textSize="14dp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/potion_nolist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"/>
 
             <ListView
                 android:id="@+id/potions_list"
