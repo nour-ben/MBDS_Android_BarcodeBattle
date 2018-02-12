@@ -78,9 +78,9 @@ public class ItemGenerator {
         int type = Math.abs((int) (long) i%3);
 
         switch (type) {
-            case 0 : return creaturesList.get(Math.abs((int) (long) i%creaturesList.size()));
+            case 2 : return creaturesList.get(Math.abs((int) (long) i%creaturesList.size()));
             case 1 : return equipmentsList.get(Math.abs((int) (long) i%equipmentsList.size()));
-            case 2 : return potionsList.get(Math.abs((int) (long) i%potionsList.size()));
+            case 0: return potionsList.get(Math.abs((int) (long) i%potionsList.size()));
         }
 
         return 0;

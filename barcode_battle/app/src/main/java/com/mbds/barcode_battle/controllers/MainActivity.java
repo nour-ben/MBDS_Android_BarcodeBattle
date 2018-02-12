@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 Object obj = ItemGenerator.generator(Long.parseLong(result.getContents()));
                 DBHandler db = new DBHandler(getApplicationContext());
+                db.open();
                 if(obj != null){
                     if (obj.getClass()== Creature.class){
                         db.createCreature((Creature)obj);

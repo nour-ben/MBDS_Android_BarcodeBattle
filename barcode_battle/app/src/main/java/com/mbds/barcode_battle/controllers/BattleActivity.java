@@ -177,24 +177,29 @@ public class BattleActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println("ON RESULT");
         if(requestCode == OK_EQUIPMENT){
-            System.out.println("ON RESULT");
-
-            Equipment equipment = data.getParcelableExtra("BATTLE_EQUIPMENT");
-            if(equipment.getType().equals("Attaque")){
-                int point = Integer.parseInt(attack_myself.getText().toString()) + equipment.getValue();
-                attack_myself.setText(Integer.toString(point));
-            } else {
-                int point = Integer.parseInt(defense_myself.getText().toString()) + equipment.getValue();
-                defense_myself.setText(Integer.toString(point));
+            System.out.println("ON RESULT"+data);
+            if(data != null){
+                Equipment equipment = data.getParcelableExtra("BATTLE_EQUIPMENT");
+                if(equipment.getType().equals("Attaque")){
+                    int point = Integer.parseInt(attack_myself.getText().toString()) + equipment.getValue();
+                    attack_myself.setText(Integer.toString(point));
+                } else {
+                    int point = Integer.parseInt(defense_myself.getText().toString()) + equipment.getValue();
+                    defense_myself.setText(Integer.toString(point));
+                }
+                equipment_choice.setVisibility(View.INVISIBLE);
             }
-            equipment_choice.setVisibility(View.INVISIBLE);
+
         }
 
         if(requestCode == OK_POTION){
-            Potion potion = data.getParcelableExtra("BATTLE_POTION");
-            int point = Integer.parseInt(life_myself.getText().toString()) + potion.getValue();
-            life_myself.setText(Integer.toString(point));
-            potion_choice.setVisibility(View.INVISIBLE);
+            if(data != null){
+                Potion potion = data.getParcelableExtra("BATTLE_POTION");
+                int point = Integer.parseInt(life_myself.getText().toString()) + potion.getValue();
+                life_myself.setText(Integer.toString(point));
+                potion_choice.setVisibility(View.INVISIBLE);
+            }
+
         }
 
     }
