@@ -29,7 +29,7 @@
             android:name=".controllers.ItemsListActivity" />
         <activity android:name=".controllers.ItemActivity"></activity>
         <activity android:name=".controllers.BattleActivityReseau" android:screenOrientation="landscape" />
-
+        <service android:enabled="true" android:name=".utils.SoundService" />
     </application>
 
 </manifest>

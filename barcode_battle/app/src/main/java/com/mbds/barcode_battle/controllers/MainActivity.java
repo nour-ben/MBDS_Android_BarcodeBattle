@@ -20,12 +20,14 @@ import com.mbds.barcode_battle.models.Equipment;
 import com.mbds.barcode_battle.models.Potion;
 import com.mbds.barcode_battle.utils.ItemGenerator;
 import com.mbds.barcode_battle.utils.ScanHandler;
+import com.mbds.barcode_battle.utils.SoundService;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btn_local;
     Button btn_reseau;
-
+    //SOUNDS
+    Intent service;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        service = new Intent(this, SoundService.class);
+        startService(service);
 
     }
 
@@ -71,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -85,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
 
             } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 Object obj = ItemGenerator.generator(Long.parseLong(result.getContents()));
+                Toast.makeText(this, "Scanned: " + obj.getClass().getSimpleName(), Toast.LENGTH_LONG).show();
                 DBHandler db = new DBHandler(getApplicationContext());
                 db.open();
                 if(obj != null){

@@ -14,8 +14,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mbds.barcode_battle.controllers.BattleActivity;
-import com.mbds.barcode_battle.controllers.MainActivity;
 import com.mbds.barcode_battle.R;
 import com.mbds.barcode_battle.models.Creature;
 import com.mbds.barcode_battle.utils.AcceptThreadServer;
@@ -61,7 +59,7 @@ public class BattleActivityReseau extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battle);
+        setContentView(R.layout.activity_battle1);
 
 
         // Enemy

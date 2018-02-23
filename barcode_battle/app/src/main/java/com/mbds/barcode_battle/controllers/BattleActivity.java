@@ -3,58 +3,63 @@ package com.mbds.barcode_battle.controllers;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.mbds.barcode_battle.R;
-import com.mbds.barcode_battle.localDatabase.DBHandler;
 import com.mbds.barcode_battle.models.Creature;
 import com.mbds.barcode_battle.models.Equipment;
 import com.mbds.barcode_battle.models.Potion;
 import com.mbds.barcode_battle.utils.ItemGenerator;
+import com.mbds.barcode_battle.utils.SoundService;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class BattleActivity extends AppCompatActivity {
 
     // Enemy
     TextView name_enemy;
-    TextView life_enemy;
+    ProgressBar life_enemy;
     TextView attack_enemy;
     TextView defense_enemy;
     ImageView photo_enemy;
 
     // Ma creature
     TextView name_myself;
-    TextView life_myself;
+    ProgressBar life_myself;
     TextView attack_myself;
     TextView defense_myself;
     ImageView photo_myself;
 
     // Boutons de jeu
     Button action;
-    ImageButton equipment_choice;
+    ImageView equipment_choice;
     public static int OK_EQUIPMENT = 99;
-    ImageButton potion_choice;
+    ImageView potion_choice;
     public static int OK_POTION = 98;
 
     TextView tourTitle;
     int tour = 1;
+    ImageView my_tour;
+    ImageView enemy_tour;
+    TextView commentTextView;
 
     Creature enemy;
     Creature me;
 
+    //SOUNDS
+    Intent service;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +70,7 @@ public class BattleActivity extends AppCompatActivity {
 
         // Enemy
         name_enemy = (TextView) findViewById(R.id.name_enemy);
-        life_enemy = (TextView) findViewById(R.id.life_enemy);
+        life_enemy = (ProgressBar) findViewById(R.id.p_life_progressBar2);
         attack_enemy = (TextView) findViewById(R.id.attaque_enemy);
         defense_enemy = (TextView) findViewById(R.id.defense_enemy);
         photo_enemy = (ImageView) findViewById(R.id.battle_enemy);
@@ -75,7 +80,7 @@ public class BattleActivity extends AppCompatActivity {
 
         if(enemy != null) {
             name_enemy.setText(enemy.getName());
-            life_enemy.setText(Integer.toString(enemy.getLife()));
+            life_enemy.setProgress(enemy.getLife());
             attack_enemy.setText(Integer.toString(enemy.getPtAttack()));
             defense_enemy.setText(Integer.toString(enemy.getPtDefense()));
             photo_enemy.setImageResource(enemy.getPhoto());
@@ -84,16 +89,17 @@ public class BattleActivity extends AppCompatActivity {
 
         // Ma creature
         name_myself = (TextView) findViewById(R.id.name_myself);
-        life_myself = (TextView) findViewById(R.id.life_myself);
+        life_myself = (ProgressBar) findViewById(R.id.p_life_progressBar1);
         attack_myself = (TextView) findViewById(R.id.attaque_myself);
         defense_myself = (TextView) findViewById(R.id.defense_myself);
         photo_myself = (ImageView) findViewById(R.id.battle_myself);
 
         Bundle bundle = getIntent().getExtras();
+
         if(bundle != null) {
             me = (Creature) bundle.getParcelable("COMBAT");
             name_myself.setText(me.getName());
-            life_myself.setText(Integer.toString(me.getLife()));
+            life_myself.setProgress(me.getLife());
             attack_myself.setText(Integer.toString(me.getPtAttack()));
             defense_myself.setText(Integer.toString(me.getPtDefense()));
             photo_myself.setImageResource(me.getPhoto());
@@ -102,30 +108,60 @@ public class BattleActivity extends AppCompatActivity {
 
         // Boutons de jeu
         action = (Button) findViewById(R.id.battle_action);
-        equipment_choice = (ImageButton) findViewById(R.id.battle_equipment);
-        potion_choice = (ImageButton) findViewById(R.id.battle_potion);
+        equipment_choice = (ImageView) findViewById(R.id.battle_equipment);
+        potion_choice = (ImageView) findViewById(R.id.battle_potion);
+        my_tour = (ImageView) findViewById(R.id.cadre_myself) ;
+        enemy_tour = (ImageView) findViewById(R.id.cadre_enemy) ;
         potion_choice.setVisibility(View.INVISIBLE);
 
-        // ATTACK
+        commentTextView = (TextView) findViewById(R.id.comment_textView);
 
-        action.setText(R.string.attack);
+        my_tour.setVisibility(View.VISIBLE);
+        enemy_tour.setVisibility(View.INVISIBLE);
+
+        action.setEnabled(false);
+
+        //SOUND
+        mediaPlayer = new MediaPlayer();
+
+        AssetFileDescriptor afd = null;
+        try {
+            afd = getAssets().openFd("Attack.mp3");
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            mediaPlayer.prepare();
+            mediaPlayer.setVolume(50, 50);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        service = new Intent(this, SoundService.class);
+        startService(service);
+        //WAITING
+        welcomeMessage();
+
+        // ATTACK
         action.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    tour ++;
-                    tourTitle.setText("TOUR " + tour);
-                    if(tour%2 == 0) {
-                        attack();
-                        action.setText(R.string.defense);
-                        potion_choice.setVisibility(View.VISIBLE);
-                        equipment_choice.setVisibility(View.VISIBLE);
-                    } else {
-                        defense();
-                        action.setText(R.string.attack);
-                        potion_choice.setVisibility(View.INVISIBLE);
-                        equipment_choice.setVisibility(View.VISIBLE);
-                    }
+            @Override
+            public void onClick(View v) {
+                tour ++;
+//                tourTitle.setText("TOUR " + tour);
+                if(tour%2 == 0) {
+                    my_tour.setVisibility(View.INVISIBLE);
+                    enemy_tour.setVisibility(View.VISIBLE);
+                    attack();
+                    action.setText(R.string.defense);
+                    potion_choice.setVisibility(View.VISIBLE);
+                    equipment_choice.setVisibility(View.VISIBLE);
+
+                } else {
+                    my_tour.setVisibility(View.VISIBLE);
+                    enemy_tour.setVisibility(View.INVISIBLE);
+                    defense();
+                    action.setText(R.string.attack);
+                    potion_choice.setVisibility(View.INVISIBLE);
+                    equipment_choice.setVisibility(View.VISIBLE);
+
                 }
+            }
         });
 
         equipment_choice.setOnClickListener(new View.OnClickListener() {
@@ -175,9 +211,8 @@ public class BattleActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("ON RESULT");
+
         if(requestCode == OK_EQUIPMENT){
-            System.out.println("ON RESULT"+data);
             if(data != null){
                 Equipment equipment = data.getParcelableExtra("BATTLE_EQUIPMENT");
                 if(equipment.getType().equals("Attaque")){
@@ -195,8 +230,8 @@ public class BattleActivity extends AppCompatActivity {
         if(requestCode == OK_POTION){
             if(data != null){
                 Potion potion = data.getParcelableExtra("BATTLE_POTION");
-                int point = Integer.parseInt(life_myself.getText().toString()) + potion.getValue();
-                life_myself.setText(Integer.toString(point));
+             //  int point = Integer.parseInt(life_myself.getProgress().toString()) + potion.getValue();
+                life_myself.setProgress(life_myself.getProgress() + potion.getValue());
                 potion_choice.setVisibility(View.INVISIBLE);
             }
 
@@ -205,10 +240,12 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     private void attack(){
+        mediaPlayer.start();
         Random random = new Random();
-        int point = Integer.parseInt(life_enemy.getText().toString()) - random.nextInt(Integer.parseInt(attack_myself.getText().toString()));
+        int point = life_enemy.getProgress() - random.nextInt(Integer.parseInt(attack_myself.getText().toString()));//Integer.parseInt(life_enemy.getText().toString()) - random.nextInt(Integer.parseInt(attack_myself.getText().toString()));
         if(point > 0) {
-            life_enemy.setText(Integer.toString(point));
+            life_enemy.setProgress(point);
+            commentTextView.setText("L'ennemi a été touché avec " + point +" points");
         } else {
             gameover(true);
         }
@@ -217,9 +254,10 @@ public class BattleActivity extends AppCompatActivity {
 
     private void defense(){
         Random random = new Random();
-        int point = Integer.parseInt(life_myself.getText().toString()) - random.nextInt(Integer.parseInt(attack_enemy.getText().toString()));
+       int point = life_myself.getProgress() - random.nextInt(Integer.parseInt(attack_enemy.getText().toString()));
         if(point > 0) {
-            life_myself.setText(Integer.toString(point));
+            life_myself.setProgress(point);
+            commentTextView.setText("Tu as été touché avec " + point +" points");
         } else {
             gameover(false);
         }
@@ -256,5 +294,40 @@ public class BattleActivity extends AppCompatActivity {
 
         ad.show();
 
+    }
+
+    private void welcomeMessage() {
+        commentTextView.setText("3");
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        commentTextView.setText("2");
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        commentTextView.setText("1");
+                                        new android.os.Handler().postDelayed(
+                                                new Runnable() {
+                                                    public void run() {
+                                                        commentTextView.setText("C'est parti!");
+                                                        new android.os.Handler().postDelayed(
+                                                                new Runnable() {
+                                                                    public void run() {
+                                                                        commentTextView.setText("");
+                                                                        action.setEnabled(true);
+                                                                    }
+                                                                }, 2000);
+                                                    }
+                                                }, 2000);
+                                    }
+                                }, 2000);
+                    }
+                }, 2000);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopService(service);
     }
 }
