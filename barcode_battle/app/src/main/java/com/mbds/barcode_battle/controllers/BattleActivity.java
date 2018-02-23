@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -43,9 +44,9 @@ public class BattleActivity extends AppCompatActivity {
 
     // Boutons de jeu
     Button action;
-    ImageView equipment_choice;
+    ImageButton equipment_choice;
     public static int OK_EQUIPMENT = 99;
-    ImageView potion_choice;
+    ImageButton potion_choice;
     public static int OK_POTION = 98;
 
     TextView tourTitle;
@@ -108,8 +109,8 @@ public class BattleActivity extends AppCompatActivity {
 
         // Boutons de jeu
         action = (Button) findViewById(R.id.battle_action);
-        equipment_choice = (ImageView) findViewById(R.id.battle_equipment);
-        potion_choice = (ImageView) findViewById(R.id.battle_potion);
+        equipment_choice = (ImageButton) findViewById(R.id.battle_equipment);
+        potion_choice = (ImageButton) findViewById(R.id.battle_potion);
         my_tour = (ImageView) findViewById(R.id.cadre_myself) ;
         enemy_tour = (ImageView) findViewById(R.id.cadre_enemy) ;
         potion_choice.setVisibility(View.INVISIBLE);

@@ -222,7 +222,7 @@
                 android:layout_marginLeft="400dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
-                <ImageView
+                <ImageButton
                     android:id="@+id/battle_equipment"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -231,7 +231,7 @@
                     android:scaleType="centerInside"
                     android:src="@drawable/equipment"
                     android:text="@string/equipment" />
-                <ImageView
+                <ImageButton
                     android:id="@+id/battle_potion"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
