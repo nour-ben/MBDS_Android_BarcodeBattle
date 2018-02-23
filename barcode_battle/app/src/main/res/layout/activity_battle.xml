@@ -216,25 +216,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/attack" />
+
+            <TextView
+                android:id="@+id/tour"
+                android:layout_marginStart="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="400dp"
+                android:layout_marginLeft="250dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageButton
                     android:id="@+id/battle_equipment"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:scaleType="centerInside"
                     android:src="@drawable/equipment"
                     android:text="@string/equipment" />
+
                 <ImageButton
                     android:id="@+id/battle_potion"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:text="@string/potion"
                     android:src="@drawable/coeur"
                     android:adjustViewBounds="true"

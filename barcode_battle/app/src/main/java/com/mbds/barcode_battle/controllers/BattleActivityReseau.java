@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mbds.barcode_battle.R;
@@ -30,14 +31,14 @@ public class BattleActivityReseau extends AppCompatActivity {
 
     // Enemy
     TextView name_enemy;
-    TextView life_enemy;
+    ProgressBar life_enemy;
     TextView attack_enemy;
     TextView defense_enemy;
     ImageView photo_enemy;
 
     // Ma creature
     TextView name_myself;
-    TextView life_myself;
+    ProgressBar life_myself;
     TextView attack_myself;
     TextView defense_myself;
     ImageView photo_myself;
@@ -59,12 +60,12 @@ public class BattleActivityReseau extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battle1);
+        setContentView(R.layout.activity_battle);
 
 
         // Enemy
         name_enemy = (TextView) findViewById(R.id.name_enemy);
-        life_enemy = (TextView) findViewById(R.id.life_enemy);
+        life_enemy = (ProgressBar) findViewById(R.id.p_life_progressBar2);
         attack_enemy = (TextView) findViewById(R.id.attaque_enemy);
         defense_enemy = (TextView) findViewById(R.id.defense_enemy);
         photo_enemy = (ImageView) findViewById(R.id.battle_enemy);

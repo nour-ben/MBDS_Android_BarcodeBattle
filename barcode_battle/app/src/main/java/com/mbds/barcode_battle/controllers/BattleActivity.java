@@ -144,7 +144,7 @@ public class BattleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tour ++;
-//                tourTitle.setText("TOUR " + tour);
+                tourTitle.setText("TOUR " + tour);
                 if(tour%2 == 0) {
                     my_tour.setVisibility(View.INVISIBLE);
                     enemy_tour.setVisibility(View.VISIBLE);
